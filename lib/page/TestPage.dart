@@ -4,8 +4,10 @@ import 'package:flutter_html_v3/flutter_html.dart';
 import 'package:html/parser.dart' as htmlparser;
 import 'package:html/dom.dart' as dom;
 
+import '../common/constants.dart';
 import '../common/customControlByTag.dart';
 import '../common/style.dart';
+
 
 class TestPage extends StatelessWidget{
 
@@ -13,6 +15,27 @@ class TestPage extends StatelessWidget{
   String htmlString = '';
 
   TestPage({required String htmlString}){
+
+    print("start");
+    flutterJs.evaluate('''
+      console.log(22);
+      console.log(33);
+
+      var html= ;
+      
+      console.log(html);
+      
+     var myElement = html.getElementById("btn_1");
+      
+      console.log(myElement);
+      
+      myElement.style.fontSize = "3px";
+     
+
+      console.log(44);
+
+    ''');
+
     this.htmlString = htmlString;
     init();
   }

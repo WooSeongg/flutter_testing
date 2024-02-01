@@ -15,8 +15,6 @@ void main() async{
 
 }
 
-//모든 곳에서 접근할 수 있도록 함
-var flutterJs = getJavascriptRuntime();
 
 
 class MyApp extends StatelessWidget {

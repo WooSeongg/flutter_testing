@@ -29,8 +29,8 @@ class FirstPage extends StatelessWidget {
 
                   var htmlString = await getHtmlString();
                   Get.to(() => TestPage(htmlString: htmlString));
-
                 },
+                style: ButtonStyle(padding: MaterialStatePropertyAll(EdgeInsets.all(30))),
                 child: Text("화면이동")
             ),
           )
