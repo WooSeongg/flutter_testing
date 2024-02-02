@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html_v3/custom_render.dart';
 import 'package:flutter_testing/util/Utils.dart';
 
-//정의할 태그
+import 'constants.dart';
+
+//정의할 태그//
 var customTagList = ["button"];
 
-//선언
+//선언//
 CustomRenderMatcher btnMatcher() =>
     (context) => (context.tree.element?.localName == 'button');
 
@@ -14,27 +16,56 @@ CustomRenderMatcher backgroundImgMatcher() =>
 
 // background-image
 
-//정의
+
+//정의//
+
+//버튼태그 -> 버튼
 var btnMatcherWidget = CustomRender.widget(
     widget: (context, buildChildren){
 
       var style = context.tree.style;
       var element = context.tree.element;
-      // print(Utils.stringToColor(element?.attributes["background-color"] ?? ""));
+
+      var backgroundColor = Utils().hexToColor(element?.attributes["background-color"] ?? "0");
+      print(backgroundColor);
+
+      var borderRadius = element?.attributes["border-radius"] ?? "0";
       return ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                print("pressed!");
+
+                flutterJs.evaluate('''
+                  try{
+                  
+                  sendMessage('someChannelName', JSON.stringify([1,2,3]);
+                  var a = '<html><div id='12'></div> </html>
+                  var b = a.getElementById('12');
+                  
+                  }
+                  catch(error){
+                    console.log("error!");
+                    console.error(error);
+                    console.log(error);
+                  }
+                  
+                ''');
+
+
+              },
               style: ButtonStyle(
                   textStyle: MaterialStatePropertyAll(TextStyle(
                       fontWeight: style.fontWeight,
-                      fontSize: style.fontSize?.value
+                      fontSize: style.fontSize?.value,
+                      // color: style.color
                   )),
                   // backgroundColor: MaterialStatePropertyAll(Color()),
                   foregroundColor:MaterialStatePropertyAll(style.color),
+                  backgroundColor: MaterialStatePropertyAll(Color(0xffffc700)),
                   overlayColor:MaterialStatePropertyAll(style.backgroundColor ?? Colors.transparent),
                   elevation:MaterialStatePropertyAll(0),
                   shape: MaterialStatePropertyAll(
                       RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0)
+                          borderRadius: BorderRadius.circular(Utils().pxToDouble(borderRadius))
                       )
                   )
               ),
