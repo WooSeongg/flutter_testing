@@ -15,9 +15,9 @@ void initJS() async{
   String jsPath = 'assets/document/common.js';
   String jsString = await rootBundle.loadString(jsPath);
 
-  //기본 정의
+  //기본
   flutterJs.evaluate('''
-  
+    
 class MenuManager{
 
   constructor() {
@@ -33,9 +33,8 @@ class MenuManager{
 }
 
 const menuManager = new MenuManager();
-  
+    
   ''');
-
 
   flutterJs.onMessage("moveScreen", (arg) async {
     if( arg["screenId"] != null){
