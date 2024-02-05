@@ -32,21 +32,24 @@ var btnMatcherWidget = CustomRender.widget(
       var borderRadius = element?.attributes["border-radius"] ?? "0";
       return ElevatedButton(
               onPressed: () {
-                print("pressed!");
+                print("pressed! in button event");
 
                 flutterJs.evaluate('''
-                  try{
-                  
-                  sendMessage('someChannelName', JSON.stringify([1,2,3]);
-                  var a = '<html><div id='12'></div> </html>
-                  var b = a.getElementById('12');
-                  
+
+                async function test(){
+                  try {
+                    console.log("move before");
+                    var result = await menuManager.moveScreen("test3");
+                    console.log("move after");
+                    // var a = await sendMessage('moveScreen', JSON.stringify({"screenId":"test3"}));
+                    // console.log(a);
                   }
-                  catch(error){
-                    console.log("error!");
-                    console.error(error);
-                    console.log(error);
+                  catch (e) {
+                    console.error(e);
                   }
+                }
+
+                 test();
                   
                 ''');
 
@@ -60,7 +63,7 @@ var btnMatcherWidget = CustomRender.widget(
                   )),
                   // backgroundColor: MaterialStatePropertyAll(Color()),
                   foregroundColor:MaterialStatePropertyAll(style.color),
-                  backgroundColor: MaterialStatePropertyAll(Color(0xffffc700)),
+                  backgroundColor: MaterialStatePropertyAll(backgroundColor),
                   overlayColor:MaterialStatePropertyAll(style.backgroundColor ?? Colors.transparent),
                   elevation:MaterialStatePropertyAll(0),
                   shape: MaterialStatePropertyAll(
@@ -83,24 +86,26 @@ var backgroundImgMatcherWidget = CustomRender.widget(
           return Container(
             width: style?.width?.value,
             height:style?.height?.value,
+            color: Colors.grey,
             child: Text("이미지가 존재하지 않습니다")
           );
         }
-        //네트워크 이미지
+        //네트워크 이미지인 경우
         else if(imgSrc.contains("http")){
           return Image.network(
             imgSrc,
-            width: 300, // 이미지의 너비
-            height: 200, // 이미지의 높이
+            width: style?.width?.value, // 이미지의 너비
+            height: style?.height?.value, // 이미지의 높이
             fit: BoxFit.cover, // 이미지의 화면에 맞게 조절
           );
         }
-        //로컬 이미지
+        //로컬 이미지인 경우
         else{
           return Image(
             image:AssetImage(imgSrc ?? ""),
-            width:400,
-            height:400
+            width:style?.width?.value,
+            height:style?.height?.value,
+            fit: BoxFit.cover, // 이미지의 화면에 맞게 조절
           );
         }
       }

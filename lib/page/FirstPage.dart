@@ -28,7 +28,7 @@ class FirstPage extends StatelessWidget {
                 onPressed: () async{
 
                   var htmlString = await getHtmlString();
-                  Get.to(() => TestPage(htmlString: htmlString));
+                  Get.to(() => TestPage(key:Key("TestPage"),htmlString: htmlString));
                 },
                 style: ButtonStyle(padding: MaterialStatePropertyAll(EdgeInsets.all(30))),
                 child: Text("화면이동")

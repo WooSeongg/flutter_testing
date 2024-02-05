@@ -20,9 +20,8 @@ void main() async{
 
 class MyApp extends StatelessWidget {
 
-
   MyApp({super.key}){
-
+    initJS();
   }
 
 
@@ -38,4 +37,5 @@ class MyApp extends StatelessWidget {
     );
     ///////////////////////////////
   }
+
 }

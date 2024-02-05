@@ -10,14 +10,14 @@ import '../common/customControlByTag.dart';
 import '../common/style.dart';
 
 
-class TestPage extends StatelessWidget{
+class TestPage2 extends StatelessWidget{
 
   Widget html2 = Container();
   String htmlString = '';
 
 
 
-  TestPage({required super.key,required String htmlString}){
+  TestPage2({required String htmlString}){
 
 
     flutterJs.onMessage('someChannelName', (dynamic args) {
@@ -28,39 +28,35 @@ class TestPage extends StatelessWidget{
 
     print("start");
     flutterJs.evaluate('''
-      console.log(22);
+      console.log('page2@@@@@@@@@@@');
       
-      var x = 300;
-      var y = 2764;
-      
-      console.log(x + y);
-     
-      async function test(){
-        
-      
-        try {
-        }
-        catch (e) {
-          console.error(e);
-        }
-      }      
-      test();
-      
+      // var x = 300;
+      // var y = 2764;
+      //
+      // console.log(x + y);
+      //
+      // async function test(){
+      //   console.log("!@#");
+      //
+      //   try {
+      //     //var a = await sendMessage('someChannelName', "123");
+      //     //console.log(a);
+      //   }
+      //   catch (e) {
+      //     console.error(e);
+      //   }
+      //  
+      //   console.log("in js");
+      //   console.log("A");
+      //  
+      // }
+      //
+      //
+      // test();
+      //
+      // console.log(44);
+
     ''');
-
-    // flutterJs.sendMessage(channelName: "ch01", args: ["123",'1']);
-
-    // flutterJs.onMessage('someChannelName', (dynamic args) {
-    //   print("under line");
-    //   print(args);
-    //   return "good return";
-    // });
-
-    flutterJs.onMessage("ch01", (args) {
-      print("@#@#");
-
-      print(args);
-    });
 
 
     this.htmlString = htmlString;
@@ -81,7 +77,7 @@ class TestPage extends StatelessWidget{
         backgroundImgMatcher(): backgroundImgMatcherWidget
         // inputMatcher(): CustomRender.widget(widget: (context, buildChildren) => SizedBox(width: context.tree.style.width?.value, height: context.tree.style.height?.value, child: TextField())),
       },
-      tagsList: Html.tags..addAll(customTagList), //"input"
+      tagsList: Html.tags..addAll(customTagList),
     );
   }
 
@@ -89,13 +85,13 @@ class TestPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          child: ListView (
-              children:[
-                html2
-              ]
-          )
-      )
+        body: Container(
+            child: ListView (
+                children:[
+                  html2
+                ]
+            )
+        )
     );
   }
 
